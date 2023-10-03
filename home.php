@@ -6,7 +6,7 @@ $user_email = $_SESSION['email'];
 $sqlEvents = "SELECT * FROM eventi WHERE attendees LIKE '%$user_email%'";
 $result = mysqli_query($conn, $sqlEvents);
 
-if (isset($_SESSION['id']) && isset($_SESSION['nome'])) {
+if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cognome'])) {
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +16,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/home.css">
     <title>Home</title>
 </head>
 
 <body>
-    <h1>Ciao, <?= $_SESSION['nome']?></h1>
+    <h1>Ciao, <?= $_SESSION['nome']?> <?= $_SESSION['cognome']?></h1>
 
     <?php while ($row = mysqli_fetch_assoc($result)) {
         $eventName = $row['nome_evento'];

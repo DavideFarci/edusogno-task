@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/register.css">
     <title>Register</title>
 </head>
 
-<?php 
+<?php
+session_start(); 
 include "database.php";
 if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) && isset($_POST['pass'])) {
     function validate($data) {
@@ -40,7 +41,10 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) 
             VALUES ('$name', '$surname', '$email', '$pass')";
         
         if (mysqli_query($conn, $sql_new_user)) {
-            echo "New user created successfully";
+            $_SESSION['id'] = mysqli_insert_id($conn);
+            $_SESSION['email'] = $email;
+            $_SESSION['nome'] = $name;
+            $_SESSION['cognome'] = $surname;
             header("Location: home.php");
             exit();
         }else {
@@ -48,8 +52,7 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) 
             exit();
         }
     }
-} 
-?>
+}?>
 
 <body>
     <form action="" method="post">

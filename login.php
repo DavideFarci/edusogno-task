@@ -30,6 +30,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['password'] = $row['password'];
                 $_SESSION['nome'] = $row['nome'];
+                $_SESSION['cognome'] = $row['cognome'];
                 $_SESSION['id'] = $row['id'];
                 header("Location: home.php");
                 exit();

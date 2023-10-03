@@ -1,0 +1,16 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+.login {
+  margin: 0 auto;
+  max-width: 600px;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid white;
+}
+
+label {
+  display: block;
+}
