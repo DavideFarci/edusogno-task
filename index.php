@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="login">
+    <div class="form">
         <form action="login.php" method="post">
             <h2>LOGIN</h2>
             <?php if (isset($_GET['error'])) { ?>
