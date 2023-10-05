@@ -96,9 +96,13 @@ class EventController
         $sqlAdd = "INSERT INTO eventi (attendees, nome_evento, data_evento) VALUES ('$attendees', '$nome_evento', '$data_evento')";
 
         if (mysqli_query($conn, $sqlAdd)) {
-            echo "Evento creato con successo!";
+            ?><div class="php_mess">
+                <?php echo "Evento creato con successo!"; ?>
+            </div><?php 
         } else {
-            echo "Errore nell'inserimento dell'evento: " . mysqli_error($conn);
+            ?><div class="php_mess">
+                <?php echo "Errore nell'inserimento dell'evento: " . mysqli_error($conn); ?>
+            </div><?php 
         }
 
         mysqli_close($conn);
@@ -110,9 +114,13 @@ class EventController
         $sqlMod = "UPDATE eventi SET attendees = '$attendees',  nome_evento = '$nome_evento', data_evento = '$data_evento' WHERE id = '$id'";
 
         if (mysqli_query($this->conn, $sqlMod)) {
-            echo "Evento aggiornato con successo!";
+            ?><div class="php_mess">
+                <?php echo "Evento aggiornato con successo!"; ?>
+            </div><?php 
         } else {
-            echo "Errore nell'aggiornamento dell'evento: " . mysqli_error($this->conn);
+            ?><div class="php_mess">
+                <?php echo "Errore nell'aggiornamento dell'evento: " . mysqli_error($this->conn); ?>
+            </div><?php 
         }
     }
 
@@ -128,9 +136,13 @@ class EventController
         $sqlDel = "DELETE FROM eventi WHERE id = $id";
 
         if (mysqli_query($this->conn, $sqlDel)) {
-            echo "Evento eliminato con successo!";
+            ?><div class="php_mess">
+                <?php echo "Evento eliminato con successo!"; ?>
+            </div><?php 
         } else {
-            echo "Errore nell'eliminazione dell'evento: " . mysqli_error($this->conn);
+            ?><div class="php_mess">
+                <?php echo "Errore nell'eliminazione dell'evento: " . mysqli_error($this->conn); ?>
+            </div><?php 
         }
     }
 }

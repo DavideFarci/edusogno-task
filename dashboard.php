@@ -89,7 +89,7 @@ if (in_array($emailAdmin, $admin)) {
                     <button class="btn_table edit" type="submit">Modifica</button>
                 </form>
                 <!-- eliminazione  -->
-                <form class="form_inline" action="" method="post" style="display: inline;">
+                <form class="form_inline" action="" method="post">
                     <input type="hidden" name="action" value="delete">
                     <input type="hidden" name="indice" value="<?= $indice; ?>">
                     <input type="hidden" name="id_evento" value="<?= $evento->getId(); ?>">
