@@ -60,9 +60,9 @@ if (in_array($emailAdmin, $admin)) {
         <form action="" method="post">
             <input type="hidden" name="action" value="add">
             <label>Nome Evento:</label>
-            <input type="text" name="nome_evento" required><br>
+            <input type="text" name="nome_evento" placeholder="Test Edusogno 1" required><br>
             <label>Attendees (Email):</label>
-            <input type="text" name="attendees" required><br>
+            <input type="text" name="attendees" placeholder="nome@example.com" required><br>
             <label>Data e Ora dell'Evento:</label>
             <input type="datetime-local" name="data_evento" required><br>
             <button class="btn text-center" type="submit">Aggiungi Evento</button>
