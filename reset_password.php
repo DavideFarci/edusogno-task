@@ -25,7 +25,9 @@ if (isset($_POST['new_pass'])) {
         $sqlNewPass = "UPDATE utenti SET password = '$newPass' WHERE id = '$user_id'";
         
         if (mysqli_query($conn, $sqlNewPass)) {
-            echo "La password è stata cambiata correttamente!";
+            ?><div class="php_mess">
+                <?php echo "La password è stata cambiata correttamente!"; ?>
+            </div><?php 
             header("refresh:2;url=index.php");
             exit();
         }else {

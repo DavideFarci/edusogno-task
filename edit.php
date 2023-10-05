@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/index.css?v=<?php echo time(); ?>">
     <title>Edit Event</title>
 </head>
 <?php
@@ -19,20 +20,24 @@ if (isset($_GET['id_evento'])) {
     $row = mysqli_fetch_assoc($result);
     
 } else {
-    echo "Nessun evento specificato da poter modificare";
+    ?><div class="php_mess">
+        <?php echo "Nessun evento specificato da poter modificare"; ?>
+    </div><?php 
 }
 ?>
 
 
 <body>
-    <form action="dashboard.php" method="post" style="display: inline;">
-        <h3>Modifica Evento:</h3>
-        <input type="hidden" name="action" value="edit">
-        <input type="hidden" name="id_evento" value="<?= $row['id'];?>">
-        <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
-        <input type="email" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
-        <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
-        <button class="btn edit" type="submit">Modifica</button>
-    </form>
+    <h4 class="title_form">Modifica l'evento</h4>
+    <div class="form">
+        <form action="dashboard.php" method="post" style="display: inline;">
+            <input type="hidden" name="action" value="edit">
+            <input type="hidden" name="id_evento" value="<?= $row['id'];?>">
+            <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
+            <input type="email" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
+            <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
+            <button class="btn text-center" type="submit">Modifica</button>
+        </form>
+    </div>
 </body>
 </html>

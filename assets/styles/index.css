@@ -9,6 +9,13 @@ body {
   color: white;
 }
 
+.php_mess {
+  font-size: 2em;
+  color: white;
+  text-align: center;
+  margin-top: 8rem;
+}
+
 .btn {
   background-color: #0057ff;
   display: block;

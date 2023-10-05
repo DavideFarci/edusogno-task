@@ -1,9 +1,11 @@
+<?php include "header.php";?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/index.css?v=<?php echo time(); ?>">
     <title>email</title>
 </head>
 
@@ -44,23 +46,33 @@ if (isset($_POST['email'])) {
             END;;
             
             $mail->send();
-            echo 'Il messaggio è stato inviato con successo, controlla la tua mail o inbox.';
+            ?><div class="php_mess">
+                <?php echo 'Il messaggio è stato inviato con successo, controlla la tua mail o inbox.'; ?>
+            </div><?php 
             
         } catch (Exception $e) {
-            echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}";
+            ?><div class="php_mess">
+                <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
+            </div><?php 
         }
     }else {
-        echo 'La mail non è presente nel nostro database';
+        ?><div class="php_mess">
+            <?php echo 'La mail non è presente nel nostro database'; ?>
+        </div><?php 
+            
     } 
 }?>
 
 
 <body>
-    <form action="" method="post">
-        <label for="email">Invia un'email per cambiare al password</label>
-        <input name="email" placeholder="Inserisci l'indirizzo email">
-        <button type="submit">INVIA</button>
-    </form>
+    <h4 class="title_form">Inserisci la tua e-mail</h4>
+    <div class="form">
+        <form action="" method="post">
+            <label for="email">Invia un'email per cambiare al password</label>
+            <input name="email" placeholder="Inserisci l'indirizzo email">
+            <button class="btn text-center" type="submit">INVIA</button>
+        </form>
+    </div>
 </body>
 </html>
 
