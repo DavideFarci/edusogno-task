@@ -4,46 +4,55 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/home.css">
     <title>email</title>
 </head>
 
 <?php
 session_start();
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $destinatario = $_SESSION['email'];
-        $oggetto = "CAMBIO PASSWORD";
-        $messaggio = "Vai a questo link per cambiare la tua password: http://localhost:8080/EduSogno/edusogno-esercizio/reset_password.php";
+include "database.php";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-        // Configura le informazioni SMTP di Mailtrap
-        $smtpServer = "smtp.mailtrap.io";
-        $smtpPort = 465;
-        $smtpUsername = "ca63e1fbfe9ca9";
-        $smtpPassword = "0015b531a04475";
+if (isset($_POST['email'])) {
+    $email = $_POST["email"];
+    require 'vendor/autoload.php';
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->SMTPAuth   = true;
+        $mail->Host       = 'smtp.mailtrap.io'; // Hostname di Mailtrap
+        $mail->Username   = 'ca63e1fbfe9ca9'; // Nome utente di Mailtrap
+        $mail->Password   = '0015b531a04475'; // Password di Mailtrap
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 2525; // Porta SMTP di Mailtrap
+    
+        $mail->setFrom('from@example.com');
+        $mail->addAddress($email);
+        $mail->addReplyTo('edusogno@exaple.com');
+    
+        $mail->isHTML(true);
+        $mail->Subject = "Password Reset";
+        $mail->Body    = <<<END
 
-        // Puoi aggiungere ulteriori intestazioni se necessario
-        $intestazioni = "From: gengi.scan@mail.com";
-
-        // Imposta le informazioni SMTP
-        ini_set("SMTP", $smtpServer);
-        ini_set("smtp_port", $smtpPort);
-        ini_set("sendmail_from", $smtpUsername);
-
-        // Invia l'email
-        if (mail($destinatario, $oggetto, $messaggio, $intestazioni)) {
-            echo "Email inviata con successo.";
-        } else {
-            echo "Errore nell'invio dell'email.";
-        }
+        Click <a href="http://localhost:8080/EduSogno/edusogno-esercizio/reset_password.php">here</a> to reset to password.
+    
+        END;;
+        
+        $mail->send();
+        echo 'Il messaggio è stato inviato con successo, controlla la tua mail o inbox.';
+        
+    } catch (Exception $e) {
+        echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}";
     }
-?>
+}?>
 
 
 <body>
-    <form method="post" action="">
-        <label for="invia_email">Invia un'email per cambiare al password</label>
-        <input name="invia_email" placeholder="Inserisci l'indirizzo email">
-        <button type="submit">Invia l'email</button>
+    <form action="" method="post">
+        <label for="email">Invia un'email per cambiare al password</label>
+        <input name="email" placeholder="Inserisci l'indirizzo email">
+        <button type="submit">INVIA</button>
     </form>
 </body>
 </html>
