@@ -35,7 +35,16 @@ body {
   cursor: pointer;
 }
 
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 header {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; */
   background-color: white;
   padding: 0.5rem;
 }
@@ -51,6 +60,10 @@ header {
   padding: 2rem;
   border: 1px solid white;
   border-radius: 10px;
+}
+
+.form_inline {
+  display: inline-block;
 }
 
 .text-center {
@@ -85,4 +98,75 @@ input:focus {
 
 .register a {
   color: blue;
+}
+
+/* HOME  */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.card {
+  border: 1px solid white;
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.title_card {
+  margin-bottom: 1rem;
+}
+
+.date {
+  margin-bottom: 1rem;
+  font-size: 0.9em;
+  color: grey;
+}
+
+.btn_logout {
+  font-weight: bold;
+  padding: 0.5rem 2rem;
+  background-color: #0057ff;
+  border-radius: 8px;
+  border: 0;
+  position: fixed;
+  bottom: 1rem;
+}
+
+.btn_logout a {
+  text-decoration: none;
+  color: black;
+}
+
+/* DASHBOARD */
+
+h1,
+h2 {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+table {
+  margin: 0 auto 2rem auto;
+}
+
+th,
+td {
+  padding: 0.3rem 0.5rem;
+}
+
+.btn_table {
+  padding: 0.2rem 0.6rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.edit {
+  background-color: yellow;
+}
+
+.delete {
+  background-color: red;
 }

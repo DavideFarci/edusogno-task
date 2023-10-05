@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/dashboard.css">
+    <link rel="stylesheet" href="assets/styles/index.css?v=<?php echo time(); ?>">
     <title>Dashboard</title>
 </head>
 <?php
 session_start();
+include "header.php";
 include "database.php";
 include "admin.php";
 
@@ -55,24 +56,26 @@ if (in_array($emailAdmin, $admin)) {
 
     <!-- Aggiungere un nuovo evento  -->
     <h2>Aggiungi un Evento</h2>
-    <form action="" method="post">
-        <input type="hidden" name="action" value="add">
-        <label>Nome Evento:</label>
-        <input type="text" name="nome_evento" required><br>
-        <label>Attendees (Email):</label>
-        <input type="text" name="attendees" required><br>
-        <label>Data e Ora dell'Evento:</label>
-        <input type="datetime-local" name="data_evento" required><br>
-        <button type="submit">Aggiungi Evento</button>
-    </form>
+    <div class="form">
+        <form action="" method="post">
+            <input type="hidden" name="action" value="add">
+            <label>Nome Evento:</label>
+            <input type="text" name="nome_evento" required><br>
+            <label>Attendees (Email):</label>
+            <input type="text" name="attendees" required><br>
+            <label>Data e Ora dell'Evento:</label>
+            <input type="datetime-local" name="data_evento" required><br>
+            <button class="btn text-center" type="submit">Aggiungi Evento</button>
+        </form>
+    </div>
 
     <h2>Elenco Eventi</h2>
     <table border="1">
         <tr>
-            <th>Nome Evento</th>
-            <th>Attendees</th>
-            <th>Data Evento</th>
-            <th>Actions</th>
+            <th>NOME EVENTO</th>
+            <th>ATTENDEES</th>
+            <th>DATA EVENTO</th>
+            <th>AZIONI</th>
         </tr>
         <?php $eventi = $eventController->index(); foreach ($eventi as $indice => $evento) { ?>
         <tr>
@@ -80,17 +83,17 @@ if (in_array($emailAdmin, $admin)) {
             <td><?= $evento->getAttendees(); ?></td>
             <td><?= $evento->getDataEvento(); ?></td>
             <td>
-                <form action="edit.php" method="get">
+                <form class="form_inline" action="edit.php" method="get">
                     <!-- Passa l'ID dell'evento come parametro nella URL -->
                     <input type="hidden" name="id_evento" value="<?= $evento->getId(); ?>">
-                    <button class="btn edit" type="submit">Modifica</button>
+                    <button class="btn_table edit" type="submit">Modifica</button>
                 </form>
                 <!-- eliminazione  -->
-                <form style="display: inline-block;" action="" method="post" style="display: inline;">
+                <form class="form_inline" action="" method="post" style="display: inline;">
                     <input type="hidden" name="action" value="delete">
                     <input type="hidden" name="indice" value="<?= $indice; ?>">
                     <input type="hidden" name="id_evento" value="<?= $evento->getId(); ?>">
-                    <button class="btn delete" type="submit">Elimina</button>
+                    <button class="btn_table delete" type="submit">Elimina</button>
                 </form>
             </td>
         </tr>

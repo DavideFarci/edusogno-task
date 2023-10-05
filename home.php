@@ -1,4 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/index.css?v=<?php echo time(); ?>">
+    <title>Home</title>
+</head>
+
 <?php 
+include "header.php";
 include "database.php";
 session_start();
 
@@ -9,32 +21,25 @@ $result = mysqli_query($conn, $sqlEvents);
 if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cognome'])) {
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/home.css">
-    <title>Home</title>
-</head>
-
 <body>
-    <h1>Ciao, <?= $_SESSION['nome']?> <?= $_SESSION['cognome']?></h1>
+    <div class="container">
+        <h1 class="title_form">Ciao <?= $_SESSION['nome']?>, ecco i tuoi eventi</h1>
 
-    <?php while ($row = mysqli_fetch_assoc($result)) {
-        $eventName = $row['nome_evento'];
-        $eventDate = $row['data_evento']; ?>
-    
-        <div class="card">
-            <h3> <?= $eventName ?> </h3>
-            <div class="date"><?= $eventDate ?></div>
-            <button>JOIN</button>
+        <div class="cards">
+            <?php while ($row = mysqli_fetch_assoc($result)) {
+            $eventName = $row['nome_evento'];
+            $eventDate = $row['data_evento']; ?>
+
+            <div class="card">
+                <h2 class="title_card"> <?= $eventName ?> </h2>
+                <div class="date"><?= $eventDate ?></div>
+                <button class="btn text-center">JOIN</button>
+            </div>
+            <?php } ?>
         </div>
-    <?php } ?>
 
-    <a href="logout.php">Logout</a>
+        <button class="btn_logout"><a href="logout.php">LOGOUT</a></button>
+    </div>
 </body>
 
 </html>

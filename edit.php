@@ -8,6 +8,7 @@
 </head>
 <?php
 session_start();
+include "header.php";
 include "database.php";
 include "admin.php";
 

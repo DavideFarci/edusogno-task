@@ -30,6 +30,11 @@
             </form>
 
             <div class="register">
+                <span>Password dimenticata?</span>
+                <a href="email.php">Recupera</a>
+            </div>
+
+            <div class="register">
                 <span>Non hai ancora un profile?</span>
                 <a href="register.php">Registrati</a>
             </div>
