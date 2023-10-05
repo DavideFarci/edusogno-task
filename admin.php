@@ -71,7 +71,7 @@ class EventController {
 
     public function store($attendees, $nome_evento, $data_evento) {
 
-        $event = new Event($attendees, $nome_evento, $data_evento);
+        $event = new Evento(null, $attendees, $nome_evento, $data_evento);
         $this->eventi[] = $event;
 
         include "database.php";
@@ -83,9 +83,9 @@ class EventController {
         $sqlAdd = "INSERT INTO eventi (attendees, nome_evento, data_evento) VALUES ('$attendees', '$nome_evento', '$data_evento')";
 
         if (mysqli_query($conn, $sqlAdd)) {
-            echo "Nuovo evento inserito nel database con successo.";
+            echo "Evento creato con successo!";
         } else {
-            echo "Errore nell'inserimento dell'evento nel database: " . mysqli_error($conn);
+            echo "Errore nell'inserimento dell'evento: " . mysqli_error($conn);
         }
 
         mysqli_close($conn);
@@ -93,12 +93,12 @@ class EventController {
 
     public function update($id, $attendees,  $nome_evento, $data_evento) {
         // Query SQL per aggiornare l'evento nel database
-        $sqlMod = "UPDATE eventi SET attendees = '$attendees',  nome_evento = '$nome_evento', data_evento = '$data_evento' WHERE id = $id_evento";
+        $sqlMod = "UPDATE eventi SET attendees = '$attendees',  nome_evento = '$nome_evento', data_evento = '$data_evento' WHERE id = '$id'";
     
         if (mysqli_query($this->conn, $sqlMod)) {
-            echo "Evento aggiornato con successo nel database.";
+            echo "Evento aggiornato con successo!";
         } else {
-            echo "Errore nell'aggiornamento dell'evento nel database: " . mysqli_error($this->conn);
+            echo "Errore nell'aggiornamento dell'evento: " . mysqli_error($this->conn);
         }
     }
 
@@ -113,9 +113,9 @@ class EventController {
         $sqlDel = "DELETE FROM eventi WHERE id = $id";
 
         if (mysqli_query($this->conn, $sqlDel)) {
-            echo "Evento eliminato con successo dal database.";
+            echo "Evento eliminato con successo!";
         } else {
-            echo "Errore nell'eliminazione dell'evento dal database: " . mysqli_error($this->conn);
+            echo "Errore nell'eliminazione dell'evento: " . mysqli_error($this->conn);
         }
     }
 

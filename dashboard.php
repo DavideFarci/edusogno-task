@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="assets/styles/dashboard.css">
     <title>Dashboard</title>
 </head>
 <?php
@@ -13,48 +13,88 @@ include "database.php";
 include "admin.php";
 
 $eventController = new EventController($conn);
-// var_dump($eventi) ;
+$emailAdmin = $_SESSION['email'];
 
-// if (in_array($_SESSION['email'], $admin)) {
+if (in_array($emailAdmin, $admin)) {
+    if (isset($_POST['action'])) {
+        $action = $_POST['action'];
+        switch ($action) {
+            case 'add':
+                if (isset($_POST['nome_evento']) && isset($_POST['attendees']) && isset($_POST['data_evento'])) {
+                    $attendees = $_POST['attendees'];
+                    $nome_evento = $_POST['nome_evento'];
+                    $data_evento = $_POST['data_evento'];
+                    $eventController->store($attendees, $nome_evento, $data_evento);
+                }
+            break;
 
-// }
+            case 'edit':
+                if (isset($_POST['id_evento']) && isset($_POST['nome_evento']) && isset($_POST['attendees']) && isset($_POST['data_evento'])) {
+                    $id = $_POST['id_evento'];
+                    $attendees = $_POST['attendees'];
+                    $nome_evento = $_POST['nome_evento'];
+                    $data_evento = $_POST['data_evento'];
+                    $eventController->update($id, $attendees, $nome_evento, $data_evento);
+                }
+            break;
 
-
-
+            case 'delete':
+                if (isset($_POST['action']) && $_POST['action'] === 'delete') {
+                    if (isset($_POST['id_evento'])) {
+                        $id = $_POST['id_evento'];
+                        $eventController->delete($id);
+                    }
+                }
+            break;
+        }
+    }
+}
 ?>
-
-
-
 <body>
-    <h1>Ciao a tutti!</h1> 
+    <h1>Dashboard</h1>
+
+    <!-- Aggiungere un nuovo evento  -->
+    <h2>Aggiungi un Evento</h2>
+    <form action="" method="post">
+        <input type="hidden" name="action" value="add">
+        <label>Nome Evento:</label>
+        <input type="text" name="nome_evento" required><br>
+        <label>Attendees (Email):</label>
+        <input type="text" name="attendees" required><br>
+        <label>Data e Ora dell'Evento:</label>
+        <input type="datetime-local" name="data_evento" required><br>
+        <button type="submit">Aggiungi Evento</button>
+    </form>
+
     <h2>Elenco Eventi</h2>
-        <ul>
-    <?php $eventi = $eventController->index(); foreach ($eventi as $indice => $evento) { ?>
-        <li>
-            <strong>Nome Evento:</strong> <?php echo $evento->getNomeEvento(); ?><br>
-            <strong>Attendees:</strong> <?php echo $evento->getAttendees(); ?><br>
-            <strong>Data e Ora dell'Evento:</strong> <?php echo $evento->getDataEvento(); ?><br>
-            <!-- <form action="admin_dashboard.php" method="post" style="display: inline;">
-                <input type="hidden" name="action" value="edit">
-                <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
-                <label for="nome_evento">Nuovo Nome Evento:</label>
-                <input type="text" name="nome_evento" value="<?php echo $evento->getNomeEvento(); ?>" placeholder="Nuovo Nome Evento">
-                <label for="attendees">Nuovi Attendees:</label>
-                <input type="email" name="attendees" value="<?php echo $evento->getAttendees(); ?>" placeholder="Nuovi Partecipanti">
-                <label for="data_evento">Nuova Data e Ora dell'Evento:</label>
-                <input type="datetime-local" name="data_evento" value="<?php echo date("Y-m-d\TH:i:s", strtotime($evento->getDataEvento())); ?>" placeholder="Nuova Data e Ora">
-                <button type="submit">Modifica</button>
-            </form> -->
-
-
-            <form action="admin_dashboard.php" method="post" style="display: inline;">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="indice" value="<?php echo $indice; ?>">
-                <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
-                <button type="submit">Elimina</button>
-            </form>
-        </li>
-    <?php } ?>
-</ul>   
+    <table border="1">
+        <tr>
+            <th>Nome Evento</th>
+            <th>Attendees</th>
+            <th>Data Evento</th>
+            <th>Actions</th>
+        </tr>
+        <?php $eventi = $eventController->index(); foreach ($eventi as $indice => $evento) { ?>
+        <tr>
+            <td><?= $evento->getNomeEvento(); ?></td>
+            <td><?= $evento->getAttendees(); ?></td>
+            <td><?= $evento->getDataEvento(); ?></td>
+            <td>
+                <form action="edit.php" method="get">
+                    <!-- Passa l'ID dell'evento come parametro nella URL -->
+                    <input type="hidden" name="id_evento" value="<?= $evento->getId(); ?>">
+                    <button class="btn edit" type="submit">Modifica</button>
+                </form>
+                <!-- eliminazione  -->
+                <form style="display: inline-block;" action="" method="post" style="display: inline;">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="indice" value="<?= $indice; ?>">
+                    <input type="hidden" name="id_evento" value="<?= $evento->getId(); ?>">
+                    <button class="btn delete" type="submit">Elimina</button>
+                </form>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
 </body>
 </html>
