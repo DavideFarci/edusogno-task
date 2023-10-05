@@ -1,62 +1,74 @@
-<?php 
+<?php
 $admin = ["davide.farci9@gmail.com"];
 
 //Descrizione classe evento con proprietà
-class Evento {
+class Evento
+{
     public $id;
     public $attendees;
     public $nome_evento;
     public $data_evento;
 
-    public function __construct($id, $attendees, $nome_evento, $data_evento) {
+    public function __construct($id, $attendees, $nome_evento, $data_evento)
+    {
         $this->id = $id;
         $this->attendees = $attendees;
         $this->nome_evento = $nome_evento;
         $this->data_evento = $data_evento;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setAttendees($attendees) {
+    public function setAttendees($attendees)
+    {
         $this->attendees = $attendees;
     }
 
-    public function getAttendees() {
+    public function getAttendees()
+    {
         return $this->attendees;
     }
 
-    public function setNomeEvento($nome_evento) {
+    public function setNomeEvento($nome_evento)
+    {
         $this->nome_evento = $nome_evento;
     }
 
-    public function getNomeEvento() {
+    public function getNomeEvento()
+    {
         return $this->nome_evento;
     }
 
-    public function setDataEvento($data_evento) {
+    public function setDataEvento($data_evento)
+    {
         $this->data_evento = $data_evento;
     }
 
-    public function getDataEvento() {
+    public function getDataEvento()
+    {
         return $this->data_evento;
     }
 }
 
-class EventController {
+class EventController
+{
     private $eventi = [];
 
-    public function __construct($conn) {
+    public function __construct($conn)
+    {
         $this->eventi = [];
         $this->conn = $conn;
     }
 
-    public function index() {
+    public function index()
+    {
         // Query SQL per recuperare gli eventi dal database
         $sqlEventi = "SELECT * FROM eventi";
         $result = mysqli_query($this->conn, $sqlEventi);
-    
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 // Creazione di oggetti Evento e aggiunta all'array $eventi
@@ -65,11 +77,12 @@ class EventController {
             }
             mysqli_free_result($result);
         }
-    
+
         return $eventi;
     }
 
-    public function store($attendees, $nome_evento, $data_evento) {
+    public function store($attendees, $nome_evento, $data_evento)
+    {
 
         $event = new Evento(null, $attendees, $nome_evento, $data_evento);
         $this->eventi[] = $event;
@@ -91,10 +104,11 @@ class EventController {
         mysqli_close($conn);
     }
 
-    public function update($id, $attendees,  $nome_evento, $data_evento) {
+    public function update($id, $attendees,  $nome_evento, $data_evento)
+    {
         // Query SQL per aggiornare l'evento nel database
         $sqlMod = "UPDATE eventi SET attendees = '$attendees',  nome_evento = '$nome_evento', data_evento = '$data_evento' WHERE id = '$id'";
-    
+
         if (mysqli_query($this->conn, $sqlMod)) {
             echo "Evento aggiornato con successo!";
         } else {
@@ -102,12 +116,13 @@ class EventController {
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         // Cerco l'evento da eliminare e se esite lo elimino
         foreach ($this->eventi as $indice => $evento) {
             if ($evento->getId() === $id) {
                 unset($this->eventi[$indice]);
-                break; 
+                break;
             }
         }
         $sqlDel = "DELETE FROM eventi WHERE id = $id";
@@ -118,6 +133,4 @@ class EventController {
             echo "Errore nell'eliminazione dell'evento: " . mysqli_error($this->conn);
         }
     }
-
-
 }

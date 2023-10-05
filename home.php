@@ -33,6 +33,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cogno
             <button>JOIN</button>
         </div>
     <?php } ?>
+
+    <a href="logout.php">Logout</a>
 </body>
 
 </html>

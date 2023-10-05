@@ -27,12 +27,12 @@ if (isset($_GET['id_evento'])) {
 <body>
     <form action="dashboard.php" method="post" style="display: inline;">
         <h3>Modifica Evento:</h3>
-            <input type="hidden" name="action" value="edit">
-            <input type="hidden" name="id_evento" value="<?= $row['id'];?>">
-            <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
-            <input type="email" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
-            <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
-            <button class="btn edit" type="submit">Modifica</button>
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="id_evento" value="<?= $row['id'];?>">
+        <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
+        <input type="email" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
+        <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
+        <button class="btn edit" type="submit">Modifica</button>
     </form>
 </body>
 </html>

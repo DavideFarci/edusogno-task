@@ -1,3 +1,4 @@
+<?php include "header.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/register.css">
+    <link rel="stylesheet" href="assets/styles/index.css?v=<?php echo time(); ?>">
     <title>Change Password</title>
 </head>
 
@@ -35,18 +36,20 @@ if (isset($_POST['new_pass'])) {
 }?>
 
 <body>
-    <form action="" method="post">
-        <h2>CHANGE PASSWORD</h2>
-        <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?= $_GET['error'] ?></p>
-        <?php } ?>
+    <h4 class="title_form">Cambia la tua password</h4>
+    <div class="form">
+        <form action="" method="post">
+            <?php if (isset($_GET['error'])) { ?>
+                <p class="error"><?= $_GET['error'] ?></p>
+            <?php } ?>
 
-        <label for="new_pass">Nuova Password</label>
-        <input type="password" name="new_pass">
+            <label for="new_pass">Inserisci la nuova password</label>
+            <input type="password" name="new_pass" placeholder="Scrivila qui">
 
-        <button type="submit">Change Password</button>
+            <button class="btn text-center" type="submit">CHANGE PASSWORD</button>
 
-    </form>
+        </form>
+    </div>
 </body>
 
 </html>

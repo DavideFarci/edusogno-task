@@ -1,3 +1,4 @@
+<?php include "header.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/register.css">
+    <link rel="stylesheet" href="assets/styles/index.css?v=<?php echo time(); ?>">
     <title>Register</title>
 </head>
 
@@ -55,27 +56,33 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) 
 }?>
 
 <body>
-    <form action="" method="post">
-        <h2>REGISTER</h2>
-        <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?= $_GET['error'] ?></p>
-        <?php } ?>
+    <h4 class="title_form">Crea il tuo account</h4>
+    <div class="form">
+        <form action="" method="post">
+            <?php if (isset($_GET['error'])) { ?>
+                <p class="error"><?= $_GET['error'] ?></p>
+            <?php } ?>
 
-        <label for="name">Nome</label>
-        <input type="text" name="name" placeholder="Inserisci il tuo nome"><br>
+            <label for="name">Inserisci il nome</label>
+            <input type="text" name="name" placeholder="Mario"><br>
 
-        <label for="surname">Cognome</label>
-        <input type="text" name="surname" placeholder="Inserisci il tuo cognome"><br>
+            <label for="surname">Inserisci il cognome</label>
+            <input type="text" name="surname" placeholder="Rossi"><br>
 
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Inserisci la tua email"><br>
+            <label for="email">Inserisci l'e-mail</label>
+            <input type="email" name="email" placeholder="nome@example.com"><br>
 
-        <label for="pass">Password</label>
-        <input type="password" name="pass">
+            <label for="pass">Inserisci la password</label>
+            <input type="password" name="pass" placeholder="Scrivila qui">
 
-        <button type="submit">Register</button>
+            <button class="btn text-center" type="submit">Register</button>
 
-    </form>
+        </form>
+        <div class="register">
+            <span>Hai già un account?</span>
+            <a href="register.php">Accedi</a>
+        </div>
+    </div>
 </body>
 
 </html>
