@@ -65,11 +65,12 @@ if (in_array($emailAdmin, $admin)) {
             <input type="text" name="attendees" placeholder="nome@example.com" required><br>
             <label>Data e Ora dell'Evento:</label>
             <input type="datetime-local" name="data_evento" required><br>
-            <button class="btn text-center" type="submit">Aggiungi Evento</button>
+            <button class="btn text-center" type="submit">AGGIUNGI EVENTO</button>
         </form>
     </div>
 
     <h2>Elenco Eventi</h2>
+    <?php if (isset($eventi)) {?>
     <table>
         <tr>
             <th>NOME EVENTO</th>
@@ -99,5 +100,8 @@ if (in_array($emailAdmin, $admin)) {
         </tr>
         <?php } ?>
     </table>
+    <?php }else {
+        ?> <h3 style="text-align: center; color: #0057ff">Non ci sono ancora eventi nell'elenco</h3> <?php
+    } ?>
 </body>
 </html>

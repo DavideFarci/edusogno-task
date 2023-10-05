@@ -27,6 +27,7 @@ body {
 
 .btn {
   background-color: var(--bg-button);
+  color: white;
   display: block;
   font-weight: bold;
   width: 100%;
