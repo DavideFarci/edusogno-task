@@ -99,6 +99,7 @@ class EventController
             ?><div class="php_mess">
                 <?php echo "Evento creato con successo!"; ?>
             </div><?php 
+            header('refresh:2');
         } else {
             ?><div class="php_mess">
                 <?php echo "Errore nell'inserimento dell'evento: " . mysqli_error($conn); ?>
@@ -139,6 +140,7 @@ class EventController
             ?><div class="php_mess">
                 <?php echo "Evento eliminato con successo!"; ?>
             </div><?php 
+            header('refresh:2');
         } else {
             ?><div class="php_mess">
                 <?php echo "Errore nell'eliminazione dell'evento: " . mysqli_error($this->conn); ?>
