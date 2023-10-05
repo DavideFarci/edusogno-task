@@ -3,8 +3,8 @@
   --border: #134077;
   --bg-button: #0057ff;
   --bg-button-hov: #0242c4;
-  --bg-edit: yellow;
-  --bg-delete: red;
+  --bg-edit: rgb(224, 224, 42);
+  --bg-delete: rgb(212, 4, 4);
 }
 
 * {
@@ -92,7 +92,7 @@ input {
 }
 
 input:focus {
-  border: 0;
+  outline: none;
   padding-inline: 2px;
 }
 
@@ -155,23 +155,39 @@ h2 {
 
 table {
   margin: 0 auto 2rem auto;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
 }
 
 th,
 td {
   padding: 0.3rem 0.5rem;
+  /* border: 1px solid var(--border); */
 }
 
 .btn_table {
-  padding: 0.2rem 0.6rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8em;
   font-weight: bold;
   border-radius: 5px;
+  border: 0;
 }
 
 .edit {
   background-color: var(--bg-edit);
 }
 
+.edit:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
 .delete {
   background-color: var(--bg-delete);
+}
+
+.delete:hover {
+  cursor: pointer;
+  background-color: red;
 }

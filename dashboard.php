@@ -70,7 +70,7 @@ if (in_array($emailAdmin, $admin)) {
     </div>
 
     <h2>Elenco Eventi</h2>
-    <table border="1">
+    <table>
         <tr>
             <th>NOME EVENTO</th>
             <th>ATTENDEES</th>
