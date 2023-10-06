@@ -1,7 +1,6 @@
 <?php
 $admin = ["davide.farci9@gmail.com"];
 
-//Descrizione classe evento con proprietà
 class Evento
 {
     public $id;
@@ -65,13 +64,11 @@ class EventController
 
     public function index()
     {
-        // Query SQL per recuperare gli eventi dal database
         $sqlEventi = "SELECT * FROM eventi";
         $result = mysqli_query($this->conn, $sqlEventi);
 
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
-                // Creazione di oggetti Evento e aggiunta all'array $eventi
                 $evento = new Evento($row['id'], $row['attendees'], $row['nome_evento'], $row['data_evento']);
                 $eventi[] = $evento;
             }
@@ -111,7 +108,6 @@ class EventController
 
     public function update($id, $attendees,  $nome_evento, $data_evento)
     {
-        // Query SQL per aggiornare l'evento nel database
         $sqlMod = "UPDATE eventi SET attendees = '$attendees',  nome_evento = '$nome_evento', data_evento = '$data_evento' WHERE id = '$id'";
 
         if (mysqli_query($this->conn, $sqlMod)) {
@@ -127,7 +123,6 @@ class EventController
 
     public function delete($id)
     {
-        // Cerco l'evento da eliminare e se esite lo elimino
         foreach ($this->eventi as $indice => $evento) {
             if ($evento->getId() === $id) {
                 unset($this->eventi[$indice]);

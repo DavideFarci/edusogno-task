@@ -70,7 +70,6 @@ if (in_array($emailAdmin, $admin)) {
     </div>
 
     <h2>Elenco Eventi</h2>
-    <?php if (isset($eventi)) {?>
     <table>
         <tr>
             <th>NOME EVENTO</th>
@@ -84,8 +83,8 @@ if (in_array($emailAdmin, $admin)) {
             <td><?= $evento->getAttendees(); ?></td>
             <td><?= $evento->getDataEvento(); ?></td>
             <td>
+                <!-- modifica  -->
                 <form class="form_inline" action="edit.php" method="get">
-                    <!-- Passa l'ID dell'evento come parametro nella URL -->
                     <input type="hidden" name="id_evento" value="<?= $evento->getId(); ?>">
                     <button class="btn_table edit" type="submit">Modifica</button>
                 </form>
@@ -100,8 +99,5 @@ if (in_array($emailAdmin, $admin)) {
         </tr>
         <?php } ?>
     </table>
-    <?php }else {
-        ?> <h3 style="text-align: center; color: #0057ff">Non ci sono ancora eventi nell'elenco</h3> <?php
-    } ?>
 </body>
 </html>
