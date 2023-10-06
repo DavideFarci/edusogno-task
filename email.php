@@ -69,7 +69,7 @@ if (isset($_POST['email'])) {
     <div class="form">
         <form action="" method="post">
             <label for="email">Inserisci la tua e-mail</label>
-            <input name="email" placeholder="Inserisci l'indirizzo email">
+            <input name="email" placeholder="nome@example.com">
             <button class="btn text-center" type="submit">INVIA</button>
         </form>
     </div>
