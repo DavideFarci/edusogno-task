@@ -14,8 +14,10 @@
 }
 
 body {
-  background-color: var(--bg-body);
-  color: black;
+  background: url(../img/bg-edusogno.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -23rem;
 }
 
 .php_mess {
@@ -51,11 +53,16 @@ body {
 }
 
 header {
+  height: 4rem;
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
+}
+
+header img {
+  height: 2.5rem;
 }
 
 header .dash {
@@ -141,18 +148,18 @@ input:focus {
 }
 
 .btn_logout {
-  font-weight: bold;
-  padding: 0.5rem 2rem;
   background-color: var(--bg-button);
-  border-radius: 8px;
-  border: 0;
   position: fixed;
   bottom: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 2rem;
+  border: 0;
+  border-radius: 8px;
 }
 
 .btn_logout a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 /* DASHBOARD */
@@ -173,7 +180,6 @@ table {
 th,
 td {
   padding: 0.3rem 0.5rem;
-  /* border: 1px solid var(--border); */
 }
 
 .btn_table {
