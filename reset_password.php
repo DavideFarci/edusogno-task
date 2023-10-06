@@ -15,14 +15,14 @@ session_start();
 include "database.php";
 if (isset($_POST['new_pass'])) {
     $newPass = $_POST['new_pass'];
-    $user_id = $_SESSION['id'];
+    $user_email = $_POST['email'];
 
 
     if (empty($newPass)) {
         header("Location: reset_password.php?error=New Pasword is required");
         exit();
     }else {
-        $sqlNewPass = "UPDATE utenti SET password = '$newPass' WHERE id = '$user_id'";
+        $sqlNewPass = "UPDATE utenti SET password = '$newPass' WHERE email = '$user_email'";
         
         if (mysqli_query($conn, $sqlNewPass)) {
             ?><div class="php_mess">
@@ -44,6 +44,9 @@ if (isset($_POST['new_pass'])) {
             <?php if (isset($_GET['error'])) { ?>
                 <p class="error"><?= $_GET['error'] ?></p>
             <?php } ?>
+
+            <label for="email">Inserisci la tua e-mail</label>
+            <input type="email" name="email" placeholder="nome@example.com">
 
             <label for="new_pass">Inserisci la nuova password</label>
             <input type="password" name="new_pass" placeholder="Scrivila qui">
