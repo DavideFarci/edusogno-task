@@ -29,19 +29,21 @@ if (isset($_GET['id_evento'])) {
 
 
 <body>
-    <h4 class="title_form">Modifica l'evento</h4>
-    <div class="form">
-        <form action="dashboard.php" method="post" style="display: inline;">
-            <input type="hidden" name="action" value="edit">
-            <input type="hidden" name="id_evento" value="<?= $row['id'];?>">
-            <label for="nome_evento">Modifica il nome</label>
-            <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
-            <label for="attendees">Modifica i partecipanti</label>
-            <input type="text" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
-            <label for="data_evento">Modifica la data</label>
-            <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
-            <button class="btn text-center" type="submit">Modifica</button>
-        </form>
-    </div>
+    <?php if (isset($_GET['id_evento'])) {?>
+        <h4 class="title_form">Modifica l'evento</h4>
+        <div class="form">
+            <form action="dashboard.php" method="post" style="display: inline;">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id_evento" value="<?= $row['id'];?>">
+                <label for="nome_evento">Modifica il nome</label>
+                <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
+                <label for="attendees">Modifica i partecipanti</label>
+                <input type="text" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
+                <label for="data_evento">Modifica la data</label>
+                <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
+                <button class="btn text-center" type="submit">Modifica</button>
+            </form>
+        </div>
+    <?php }?>
 </body>
 </html>
