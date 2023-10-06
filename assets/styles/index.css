@@ -39,11 +39,10 @@ body {
 }
 
 .btn:focus {
-  border: 2px solid var(--bg-button);
+  background-color: var(--bg-button-hov);
 }
 
 .btn:hover {
-  background-color: var(--bg-button-hov);
   cursor: pointer;
 }
 
