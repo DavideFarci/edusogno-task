@@ -164,6 +164,10 @@ input:focus {
 
 /* DASHBOARD */
 
+h1 {
+  color: var(--bg-button);
+}
+
 h1,
 h2 {
   text-align: center;
