@@ -65,10 +65,10 @@ if (isset($_POST['email'])) {
 
 
 <body>
-    <h4 class="title_form">Inserisci la tua e-mail</h4>
+    <h4 class="title_form">Invia un'email al tuo indirizzo per cambiare la password</h4>
     <div class="form">
         <form action="" method="post">
-            <label for="email">Invia un'email per cambiare al password</label>
+            <label for="email">Inserisci la tua e-mail</label>
             <input name="email" placeholder="Inserisci l'indirizzo email">
             <button class="btn text-center" type="submit">INVIA</button>
         </form>
