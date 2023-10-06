@@ -86,6 +86,48 @@ if (in_array($emailAdmin, $admin)) {
                 if (isset($_POST['action']) && $_POST['action'] === 'delete') {
                     if (isset($_POST['id_evento'])) {
                         $id = $_POST['id_evento'];
+
+                        $sqlDel = "SELECT * FROM eventi WHERE id='$id'";
+                        $result = mysqli_query($conn, $sqlDel);
+                        $row = mysqli_fetch_assoc($result);
+
+                        $singleEmail = explode(",", $row['attendees']);
+                        $nome_evento = $row['nome_evento'];
+    
+                        $mail = new PHPMailer(true);
+                        try {
+                            $mail->isSMTP();
+                            $mail->SMTPAuth   = true;
+                            $mail->Host       = 'smtp.mailtrap.io'; // Hostname di Mailtrap
+                            $mail->Username   = 'ca63e1fbfe9ca9'; // Nome utente di Mailtrap
+                            $mail->Password   = '0015b531a04475'; // Password di Mailtrap
+                            $mail->SMTPSecure = 'tls';
+                            $mail->Port       = 2525; // Porta SMTP di Mailtrap
+                        
+                            $mail->setFrom('from@example.com');
+                            foreach ($singleEmail as $recipients) {
+                                $mail->addAddress($recipients);
+                            }
+                            $mail->addReplyTo('edusogno@exaple.com');
+                        
+                            $mail->isHTML(true);
+                            $mail->Subject = "Password Reset";
+                            $mail->Body    = <<<EOD
+                            Il tuo evento: '$nome_evento', e' stato cancellato. Ci scusiamo per il disagio.<br>
+                            Edusogno Team
+                            EOD;
+                            
+                            $mail->send();
+                            ?><div class="php_mess">
+                                <?php echo 'Il messaggio è stato inviato con successo ai partecipanti'; ?>
+                            </div><?php 
+                            
+                        } catch (Exception $e) {
+                            ?><div class="php_mess">
+                                <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
+                            </div><?php 
+                        }
+
                         $eventController->delete($id);
                     }
                 }
