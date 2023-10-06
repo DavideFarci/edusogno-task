@@ -37,7 +37,7 @@ if (isset($_GET['id_evento'])) {
             <label for="nome_evento">Modifica il nome</label>
             <input type="text" name="nome_evento" value="<?= $row['nome_evento']; ?>" placeholder="Nuovo Nome Evento"><br>
             <label for="attendees">Modifica i partecipanti</label>
-            <input type="email" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
+            <input type="text" name="attendees" value="<?= $row['attendees']; ?>" placeholder="Nuovi Partecipanti"><br>
             <label for="data_evento">Modifica la data</label>
             <input type="datetime-local" name="data_evento" value="<?= date("Y-m-d\TH:i:s", strtotime($row['data_evento'])); ?>" placeholder="Nuova Data e Ora">
             <button class="btn text-center" type="submit">Modifica</button>

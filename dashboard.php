@@ -9,6 +9,10 @@
 </head>
 <?php
 session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+require 'vendor/autoload.php';
 include "header.php";
 include "database.php";
 include "admin.php";
@@ -36,6 +40,45 @@ if (in_array($emailAdmin, $admin)) {
                     $nome_evento = $_POST['nome_evento'];
                     $data_evento = $_POST['data_evento'];
                     $eventController->update($id, $attendees, $nome_evento, $data_evento);
+
+                    $singleEmail = explode(",", $_POST['attendees']);
+                    $finalAttendees = implode(", ", $singleEmail);
+
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->isSMTP();
+                        $mail->SMTPAuth   = true;
+                        $mail->Host       = 'smtp.mailtrap.io'; // Hostname di Mailtrap
+                        $mail->Username   = 'ca63e1fbfe9ca9'; // Nome utente di Mailtrap
+                        $mail->Password   = '0015b531a04475'; // Password di Mailtrap
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port       = 2525; // Porta SMTP di Mailtrap
+                    
+                        $mail->setFrom('from@example.com');
+                        foreach ($singleEmail as $recipients) {
+                            $mail->addAddress($recipients);
+                        }
+                        $mail->addReplyTo('edusogno@exaple.com');
+                    
+                        $mail->isHTML(true);
+                        $mail->Subject = "Password Reset";
+                        $mail->Body    = <<<EOD
+                        Il tuo evento: '$nome_evento', e' stato modificato dall'amministratore. Il nuovo evento e' il seguente:<br>
+                        NOME EVENTO: '$nome_evento'<br>
+                        PARTECIPANTI: '$finalAttendees'<br>
+                        DATA EVENTO: '$data_evento'
+                        EOD;
+                        
+                        $mail->send();
+                        ?><div class="php_mess">
+                            <?php echo 'Il messaggio è stato inviato con successo ai partecipanti'; header('refresh:2'); ?>
+                        </div><?php 
+                        
+                    } catch (Exception $e) {
+                        ?><div class="php_mess">
+                            <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
+                        </div><?php 
+                    }
                 }
             break;
 
