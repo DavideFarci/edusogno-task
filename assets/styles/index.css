@@ -52,7 +52,16 @@ body {
 
 header {
   background-color: white;
-  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+header .dash {
+  font-weight: bold;
+  color: var(--bg-button);
+  text-decoration: none;
 }
 
 .title_form {

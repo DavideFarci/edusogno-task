@@ -49,7 +49,6 @@ if (in_array($emailAdmin, $admin)) {
             break;
         }
     }
-}
 ?>
 <body>
     <h1>Dashboard</h1>
@@ -101,3 +100,8 @@ if (in_array($emailAdmin, $admin)) {
     </table>
 </body>
 </html>
+<?php }else {
+    ?><div class="php_mess">
+        <?php echo "Non sei autorizzato a vedere questa pagina!"; ?>
+    </div><?php 
+}?>
